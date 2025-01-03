@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sentiment Predictor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f7f7f7;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            display: flex;
+            width: 80%;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .input-section,
+        .output-section {
+            flex: 1;
+            padding: 20px;
+        }
+
+        .input-section {
+            border-right: 1px solid #ccc;
+        }
+
+        h1 {
+            text-align:left;
+            font-size: 1.8em;
+        }
+
+        textarea {
+            width: 100%;
+            height: 100px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 10px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+
+        button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 4px;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .result {
+            margin-top: 20px;
+            font-weight: bold;
+            font-size: 25px;
+            color: #333;
+            text-align: center;
+        }
+
+        .output-section {
+            margin-top: 10%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="input-section">
+            <h1>Product Review Sentiment Predictor</h1>
+            <form id="predictForm">
+                <label for="text">Enter text:</label><br>
+                <textarea name="text" id="text" required></textarea><br>
+                <button type="submit" id="predictButton" class="submit-button">Predict Sentiment</button>
+            </form>
+        </div>
+        <div class="output-section">
+            <div class="result">
+                <p><span id="result">Output will be displayed here</span></p>
+            </div>
+        </div>
+    </div>
+    <script>
+        const form = document.getElementById("predictForm");
+
+        form.addEventListener('submit', (event) => {
+            event.preventDefault();
+
+            const textInput = document.getElementById("text").value;
+
+            // POST Request
+            fetch('/predict', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ text: textInput }),  // Send data as JSON
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("result").innerHTML = `${data.sentiment} review`;
+            })
+            .catch((error) => {
+                console.log(error);
+                document.getElementById("result").innerHTML = "Error, please try again";
+            })
+        });
+    </script>
+</body>
+
+</html>
