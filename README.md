@@ -1,7 +1,7 @@
 # Product-Reviews-Sentiment-Analysis
 Sentiment analysis of product reviews, classifying them into positive, negative, and neutral categories. The model is trained using the BERT transformer and employs the BERT tokenizer for text preprocessing. The solution is integrated into a web-based application built with Flask for user interaction and deployment
 
-### Download zip file of the model from here 
+### Download zip file of the model from here https://drive.google.com/file/d/1ARbcYeOpTDGyePfwaLu24WrECw5OnUN-/view?usp=sharing
 
 ![Image](./output/op1.png)
 ![Image](./output/op2.png)
